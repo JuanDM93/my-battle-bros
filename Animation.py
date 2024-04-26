@@ -1,10 +1,11 @@
-import arcade
-import glob
-from constants import CHARACTER_SCALING
-
 """
+This module is used to create animations for the game.
+
 [x] Animations can either repeat or hold.
 """
+import glob
+import arcade
+
 
 def load_texture_pair(filename):
     """
@@ -16,11 +17,18 @@ def load_texture_pair(filename):
     ]
 
 
-class Animation(object):
+class Animation:
+    """
+    This class represents a sequence of frames that can be used as an animation.
+    """
+
     def __init__(self, dirpath, tick_count, repeats):
+        """
+        Initialize the animation with the given directory path, tick count, and repeat flag.
+        """
         self.frame_paths = sorted(glob.glob(dirpath + "/*.png"))
         if not self.frame_paths:
-            raise RuntimeError("No frames in '%s'" % dirpath)
+            raise RuntimeError(f"No frames in {dirpath}")
         self.textures = [load_texture_pair(x) for x in self.frame_paths]
         self.frame_count = len(self.frame_paths)
         self.tick_count = tick_count
@@ -29,8 +37,10 @@ class Animation(object):
         self.repeats = repeats
 
     def get_frame(self, index_count: int, direction: int = 0):
+        """
+        Get the frame at the given index count and direction.
+        """
         if index_count > self.check-1 and not self.repeats:
             return self.textures[-1][direction]
-        else:
-            idx = (index_count // self.step) % self.frame_count
-            return self.textures[idx][direction]
+        idx = (index_count // self.step) % self.frame_count
+        return self.textures[idx][direction]

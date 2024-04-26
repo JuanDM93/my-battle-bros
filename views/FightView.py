@@ -1,12 +1,29 @@
+"""
+This module contains the FightView class, which is responsible for rendering the fight scene.
+"""
+import os
+import glob
+import random
 import arcade
 from Player import Player
-import random
-from constants import *
-import glob
+
+
+from constants import (
+    SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_IMG_ROOT,
+    MUSIC_ROOT, COUNTDOWN_FROM, TICKS_PER_COUNTDOWN,
+    FIGHT_MSG, STRIKE_DISTANCE, ATTACK_OFFSET, ATTACK_FUDGE,
+)
 
 
 class FightView(arcade.View):
+    """
+    This class is responsible for rendering the fight scene.
+    """
+
     def __init__(self, window, player1, player2):
+        """
+        Initialize the fight scene with the given window and players.
+        """
         super().__init__()
 
         self.window = window
@@ -16,7 +33,7 @@ class FightView(arcade.View):
         self.player2 = player2
 
         # endgame
-        self.winner = None
+        self.winner: Player = None
 
         # background images
         bg_images = glob.glob(os.path.join(BACKGROUND_IMG_ROOT, "*.png"))
@@ -36,19 +53,28 @@ class FightView(arcade.View):
         self.countdown_values = range(1, COUNTDOWN_FROM+1)
 
     def on_key_press(self, key, modifiers):
+        """
+        Handle key press events.
+        """
         if not self.winner and not self.countdown_counter:
             self.player1.on_keypress(key, modifiers)
             self.player2.on_keypress(key, modifiers)
 
     def on_key_release(self, key, modifiers):
+        """
+        Handle key release events.
+        """
         if not self.winner and not self.countdown_counter:
             self.player1.on_key_release(key, modifiers)
             self.player2.on_key_release(key, modifiers)
 
     def _update_winner(self):
-        if self.player1.health <1:
+        """
+        Update the winner of the game.
+        """
+        if self.player1.health < 1:
             self.winner = self.player2
-        if self.player2.health <1:
+        if self.player2.health < 1:
             self.winner = self.player1
 
         if self.winner and self.enable_bg_music:
@@ -56,6 +82,9 @@ class FightView(arcade.View):
             self.player2.game_over = True
 
     def on_update(self, delta_time):
+        """
+        Update the game state.
+        """
         if self.countdown_counter:
             self.countdown_counter -= 1
             if self.countdown_counter == TICKS_PER_COUNTDOWN:
@@ -78,6 +107,9 @@ class FightView(arcade.View):
                     self.player1.hit_update(self.player2)
 
     def on_draw(self):
+        """
+        Draw the game state.
+        """
         arcade.start_render()
 
         # Draw background
@@ -98,7 +130,5 @@ class FightView(arcade.View):
                              arcade.color.RED, font_size=120, anchor_x="center", font_name="Utopia", bold=True)
         # Draw "Winner message
         elif self.winner:
-            arcade.draw_text(f"Player {self.winner.playerIdx + 1} WINS!!", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+            arcade.draw_text(f"Player {self.winner.player_idx + 1} WINS!!", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                              arcade.color.RED, font_size=60, anchor_x="center", font_name="Utopia")
-
-

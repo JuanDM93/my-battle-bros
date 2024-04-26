@@ -1,3 +1,6 @@
+"""
+This file contains all the constants used in the game.
+"""
 from enum import Enum
 import os
 
@@ -33,7 +36,7 @@ BLOCK_TOTAL_TIME = BLOCK_INIT_TIME + BLOCK_ACTIVE_TIME
 ATTACK_TIME = 30
 ATTACK_OFFSET = 5
 ATTACK_FUDGE = 1
-HIT_RECOVER_TIME = 20 # in game steps
+HIT_RECOVER_TIME = 20  # in game steps
 IDLE_ANIMATION_TIME = 100
 MOVEMENT_ANIMATION_TIME = 100
 START_TIME = 200
@@ -59,12 +62,18 @@ FIGHT_MSG = "FIGHT!"
 
 
 class LevelStates(Enum):
+    """
+    Enum for the different states of the game
+    """
     low = 0
     medium = 1
     # high is implicit, encoded
 
 
 class EventStates(Enum):
+    """
+    Enum for the different states of the game
+    """
     idle = 0
     blocking = 1
     attacking = 2

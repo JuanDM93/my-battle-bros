@@ -1,10 +1,19 @@
+"""
+Main file to run the game
+"""
 import arcade
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE
 from views.IntroView import IntroView
 
 
 def main():
-    window = arcade.Window(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, title=SCREEN_TITLE)
+    """
+    Main method to run the game
+    """
+    window = arcade.Window(
+        title=SCREEN_TITLE,
+        width=SCREEN_WIDTH, height=SCREEN_HEIGHT,
+    )
     menu_view = IntroView(window)
     window.show_view(menu_view)
     arcade.run()

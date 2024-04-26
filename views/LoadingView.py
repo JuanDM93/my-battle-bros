@@ -1,12 +1,22 @@
+"""
+This file contains the LoadingView class, which is a subclass of arcade.View.
+"""
 import arcade
+import pyglet
 from constants import SCREEN_WIDTH, Y_BASELINE, BOX_HEIGHT, BOX_WIDTH
 from views.FightView import FightView
-import pyglet
 from Player import Player
 
 
 class LoadingView(arcade.View):
+    """
+    This class represents the loading screen that the player sees when the game is loading.
+    """
+
     def __init__(self, window: pyglet.window.Window):
+        """
+        Initialize the loading screen with the given window.
+        """
         super().__init__()
         self.window = window
         self.idx = 0
@@ -15,6 +25,9 @@ class LoadingView(arcade.View):
         self.drawn = False
 
     def on_draw(self):
+        """
+        Draw the game state.
+        """
         arcade.start_render()
         arcade.draw_text("Loading Characters...", self.window.width/2, self.window.height/2,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
@@ -24,9 +37,14 @@ class LoadingView(arcade.View):
         self.drawn = True
 
     def on_update(self, delta_time: float):
+        """
+        Update the game state.
+        """
         if self.drawn:
-            player1 = Player(int(1/8 * SCREEN_WIDTH), Y_BASELINE, BOX_WIDTH, BOX_HEIGHT, 0, character='nate')
-            player2 = Player(int(7/8 * SCREEN_WIDTH), Y_BASELINE, BOX_WIDTH, BOX_HEIGHT, 1, character='nate')
-            fight_view = FightView(self.window, player1=player1, player2=player2)
+            player1 = Player(int(1/8 * SCREEN_WIDTH), Y_BASELINE,
+                             BOX_WIDTH, BOX_HEIGHT, 0, character='nate')
+            player2 = Player(int(7/8 * SCREEN_WIDTH), Y_BASELINE,
+                             BOX_WIDTH, BOX_HEIGHT, 1, character='nate')
+            fight_view = FightView(
+                self.window, player1=player1, player2=player2)
             self.window.show_view(fight_view)
-
