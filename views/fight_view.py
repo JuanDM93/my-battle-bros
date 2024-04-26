@@ -4,9 +4,10 @@ This module contains the FightView class, which is responsible for rendering the
 import os
 import glob
 import random
-import arcade
-from Player import Player
 
+import arcade
+
+from models import Player
 
 from constants import (
     SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_IMG_ROOT,

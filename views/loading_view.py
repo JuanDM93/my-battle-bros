@@ -3,9 +3,10 @@ This file contains the LoadingView class, which is a subclass of arcade.View.
 """
 import arcade
 import pyglet
+
 from constants import SCREEN_WIDTH, Y_BASELINE, BOX_HEIGHT, BOX_WIDTH
-from views.FightView import FightView
-from Player import Player
+from models import Player
+from .fight_view import FightView
 
 
 class LoadingView(arcade.View):

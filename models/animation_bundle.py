@@ -10,7 +10,7 @@ import pickle
 import glob
 import random
 
-from Animation import Animation
+from .animation import Animation
 from constants import (
     SPRITES_ROOT, SPRITES_CACHE_DIR,
     ATTACK_TIME, BLOCK_INIT_TIME, HIT_RECOVER_TIME,

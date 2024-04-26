@@ -2,6 +2,7 @@
 Player class for the game. Contains the Player class, which represents a player in the game.
 """
 import os
+
 import arcade
 from arcade import sound
 from arcade.draw_commands import draw_texture_rectangle
@@ -12,7 +13,7 @@ from constants import (
     KNOCKBACK_DISTANCE, LevelStates, HEALTHBAR_HEIGHT, HEALTHBAR_PADDING, HEALTHBAR_WIDTH,
     HEALTHBAR_Y_OFFSET, SOUND_ROOT, JUMP_FUDGE,
 )
-from AnimationBundle import build_animations_registry
+from .animation_bundle import build_animations_registry
 
 
 PLAYER_2_KEYMAP = {

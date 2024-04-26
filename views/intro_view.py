@@ -4,7 +4,8 @@ which is the first view that the player sees when they start the game.
 """
 import arcade
 import pyglet
-from views.LoadingView import LoadingView
+
+from .loading_view import LoadingView
 
 COLORS = [arcade.color.BLACK, arcade.color.RED_BROWN]
 
