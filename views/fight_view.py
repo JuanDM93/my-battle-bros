@@ -53,13 +53,13 @@ class FightView(arcade.View):
         self.countdown_counter = (COUNTDOWN_FROM + 1) * TICKS_PER_COUNTDOWN
         self.countdown_values = range(1, COUNTDOWN_FROM+1)
 
-    def on_key_press(self, key, modifiers):
+    def on_key_press(self, symbol, modifiers):
         """
         Handle key press events.
         """
         if not self.winner and not self.countdown_counter:
-            self.player1.on_keypress(key, modifiers)
-            self.player2.on_keypress(key, modifiers)
+            self.player1.on_keypress(symbol, modifiers)
+            self.player2.on_keypress(symbol, modifiers)
 
     def on_key_release(self, key, modifiers):
         """
@@ -95,11 +95,11 @@ class FightView(arcade.View):
         else:
             self._update_winner()
             if self.player1.center_x < self.player2.center_x:
-                dir = 0
+                win_dir = 0
             else:
-                dir = 1
-            self.player1.update_initial(dir)
-            self.player2.update_initial(dir)
+                win_dir = 1
+            self.player1.update_initial(win_dir)
+            self.player2.update_initial(win_dir)
             # handle hits
             if abs(self.player1.center_x - self.player2.center_x) < STRIKE_DISTANCE:
                 if ATTACK_OFFSET < self.player1.attack_counter <= ATTACK_OFFSET + ATTACK_FUDGE:
@@ -122,14 +122,22 @@ class FightView(arcade.View):
 
         # Draw countdown timer
         if self.countdown_counter > TICKS_PER_COUNTDOWN:
-            arcade.draw_text(f"{self.countdown_values[(self.countdown_counter-TICKS_PER_COUNTDOWN-1) // TICKS_PER_COUNTDOWN]}", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
-                             arcade.color.RED, font_size=120, anchor_x="center", font_name="Utopia", bold=True)
+            arcade.draw_text(
+                f"{self.countdown_values[(
+                    self.countdown_counter-TICKS_PER_COUNTDOWN-1) // TICKS_PER_COUNTDOWN]}",
+                SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, arcade.color.RED,
+                font_size=120, anchor_x="center", font_name="Utopia", bold=True
+            )
         # Draw "Fight" message
         elif self.countdown_counter:
-            arcade.draw_text(FIGHT_MSG,
-                             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
-                             arcade.color.RED, font_size=120, anchor_x="center", font_name="Utopia", bold=True)
+            arcade.draw_text(
+                FIGHT_MSG, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, arcade.color.RED,
+                font_size=120, anchor_x="center", font_name="Utopia", bold=True
+            )
         # Draw "Winner message
         elif self.winner:
-            arcade.draw_text(f"Player {self.winner.player_idx + 1} WINS!!", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
-                             arcade.color.RED, font_size=60, anchor_x="center", font_name="Utopia")
+            arcade.draw_text(
+                f"Player {self.winner.player_idx + 1} WINS!!",
+                SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, arcade.color.RED,
+                font_size=60, anchor_x="center", font_name="Utopia"
+            )

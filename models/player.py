@@ -49,7 +49,13 @@ class Player:
     Attack_timer = -1
     """
 
-    def __init__(self, center_x: int, center_y: int, width: int, height: int, player_idx: int, character='nate'):
+    def __init__(
+        self,
+        center_x: int, center_y: int,
+        width: int, height: int,
+        player_idx: int,
+        character='nate'
+    ):
         """
         Initialize the player with the given parameters.
         """
@@ -172,11 +178,11 @@ class Player:
             return -1 * MOVEMENT_SPEED
         return 0
 
-    def update_initial(self, dir):
+    def update_initial(self, play_dir):
         """
         Update the player's position.
         """
-        if dir:
+        if play_dir:
             if self.player_idx == 0:
                 self.character_face_direction = 1
             else:
@@ -233,20 +239,39 @@ class Player:
         """
         if self.player_idx == 0:
             HEALTHBAR_X = HEALTHBAR_WIDTH//2 + 10
-            arcade.draw_text(self.character, HEALTHBAR_X, SCREEN_HEIGHT - 40,
-                             self.color, font_size=30, anchor_x="center")
-            arcade.draw_rectangle_filled(center_x=HEALTHBAR_X, center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 -
-                                         HEALTHBAR_Y_OFFSET, width=HEALTHBAR_WIDTH, height=HEALTHBAR_HEIGHT, color=arcade.color.BLACK)
-            arcade.draw_rectangle_filled(center_x=HEALTHBAR_X, center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET, width=(
-                (HEALTHBAR_WIDTH-HEALTHBAR_PADDING)*self.health/100)//1, height=HEALTHBAR_HEIGHT-HEALTHBAR_PADDING, color=arcade.color.GREEN)
+            arcade.draw_text(
+                self.character, HEALTHBAR_X, SCREEN_HEIGHT - 40,
+                self.color, font_size=30, anchor_x="center"
+            )
+            arcade.draw_rectangle_filled(
+                center_x=HEALTHBAR_X,
+                center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET,
+                width=HEALTHBAR_WIDTH, height=HEALTHBAR_HEIGHT,
+                color=arcade.color.BLACK
+            )
+            arcade.draw_rectangle_filled(
+                center_x=HEALTHBAR_X,
+                center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET,
+                width=((HEALTHBAR_WIDTH-HEALTHBAR_PADDING)*self.health/100)//1,
+                height=HEALTHBAR_HEIGHT-HEALTHBAR_PADDING, color=arcade.color.GREEN
+            )
         else:
             HEALTHBAR_X = SCREEN_WIDTH - (HEALTHBAR_WIDTH//2+10)
-            arcade.draw_text(self.character, HEALTHBAR_X, SCREEN_HEIGHT - 40,
-                             self.color, font_size=30, anchor_x="center")
-            arcade.draw_rectangle_filled(center_x=HEALTHBAR_X, center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 -
-                                         HEALTHBAR_Y_OFFSET, width=HEALTHBAR_WIDTH, height=HEALTHBAR_HEIGHT, color=arcade.color.BLACK)
-            arcade.draw_rectangle_filled(center_x=HEALTHBAR_X, center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET, width=(
-                (HEALTHBAR_WIDTH-HEALTHBAR_PADDING)*self.health/100)//1, height=HEALTHBAR_HEIGHT-HEALTHBAR_PADDING, color=arcade.color.GREEN)
+            arcade.draw_text(
+                self.character, HEALTHBAR_X, SCREEN_HEIGHT - 40,
+                self.color, font_size=30, anchor_x="center"
+            )
+            arcade.draw_rectangle_filled(
+                center_x=HEALTHBAR_X,
+                center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET,
+                width=HEALTHBAR_WIDTH, height=HEALTHBAR_HEIGHT, color=arcade.color.BLACK
+            )
+            arcade.draw_rectangle_filled(
+                center_x=HEALTHBAR_X,
+                center_y=SCREEN_HEIGHT-HEALTHBAR_HEIGHT//2 - HEALTHBAR_Y_OFFSET,
+                width=((HEALTHBAR_WIDTH-HEALTHBAR_PADDING)*self.health/100)//1,
+                height=HEALTHBAR_HEIGHT-HEALTHBAR_PADDING, color=arcade.color.GREEN
+            )
 
     def update_texture(self, cur_state, next_state):
         """

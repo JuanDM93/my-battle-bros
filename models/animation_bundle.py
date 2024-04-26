@@ -10,13 +10,13 @@ import pickle
 import glob
 import random
 
-from .animation import Animation
 from constants import (
     SPRITES_ROOT, SPRITES_CACHE_DIR,
     ATTACK_TIME, BLOCK_INIT_TIME, HIT_RECOVER_TIME,
     IDLE_ANIMATION_TIME, MOVEMENT_ANIMATION_TIME,
     WIN_TIME, LOSE_TIME, START_TIME,
 )
+from .animation import Animation
 
 STANCES = {
     "high",
