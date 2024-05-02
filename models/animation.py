@@ -7,7 +7,7 @@ import glob
 import arcade
 
 
-def load_texture_pair(filename):
+def load_texture_pair(filename: str):
     """
     Load a texture pair, with the second being a mirror image.
     """
@@ -22,7 +22,7 @@ class Animation:
     This class represents a sequence of frames that can be used as an animation.
     """
 
-    def __init__(self, dirpath, tick_count, repeats):
+    def __init__(self, dirpath: str, tick_count: int, repeats: bool):
         """
         Initialize the animation with the given directory path, tick count, and repeat flag.
         """

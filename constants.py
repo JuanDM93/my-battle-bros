@@ -1,8 +1,8 @@
 """
 This file contains all the constants used in the game.
 """
-from enum import Enum
 import os
+from enum import Enum
 
 # GAME SCREEN PARAMETERS
 SCREEN_WIDTH = 1280
@@ -53,7 +53,6 @@ SPRITES_CACHE_DIR = os.path.join(PROJECT_ROOT, '.sprites_cache')
 
 if not os.path.exists(SPRITES_CACHE_DIR):
     os.mkdir(SPRITES_CACHE_DIR)
-
 
 # COUNTDOWN TIMER
 TICKS_PER_COUNTDOWN = 40

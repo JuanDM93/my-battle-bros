@@ -3,7 +3,7 @@ This file contains the IntroView class,
 which is the first view that the player sees when they start the game.
 """
 import arcade
-import pyglet
+from pyglet.window import Window
 
 from .loading_view import LoadingView
 
@@ -15,7 +15,10 @@ class IntroView(arcade.View):
     This class represents the first view that the player sees when they start the game.
     """
 
-    def __init__(self, window: pyglet.window.Window):
+    def __init__(self, window: Window):
+        """
+        Initialize the view.
+        """
         super().__init__()
         self.window = window
         self.idx = 0
@@ -28,10 +31,14 @@ class IntroView(arcade.View):
         arcade.start_render()
         arcade.set_background_color(arcade.color.SLATE_GRAY)
         color = COLORS[(self.idx // 80) % 2]
-        arcade.draw_text("Battle Bros", self.window.width/2, self.window.height/2,
-                         color, font_size=50, anchor_x="center")
-        arcade.draw_text("Click to begin...", self.window.width/2, self.window.height/2-75,
-                         arcade.color.WHITE, font_size=20, anchor_x="center")
+        arcade.draw_text(
+            "Battle Bros", self.window.width/2, self.window.height/2,
+            color, font_size=50, anchor_x="center"
+        )
+        arcade.draw_text(
+            "Click to begin...", self.window.width/2, self.window.height/2-75,
+            arcade.color.WHITE, font_size=20, anchor_x="center"
+        )
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """

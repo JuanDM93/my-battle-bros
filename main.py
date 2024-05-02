@@ -2,8 +2,11 @@
 Main file to run the game
 """
 import arcade
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE
 from views import IntroView
+from constants import (
+    SCREEN_WIDTH, SCREEN_HEIGHT,
+    SCREEN_TITLE,
+)
 
 
 def main():

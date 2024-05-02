@@ -6,9 +6,9 @@ import glob
 import random
 
 import arcade
+from pyglet.window import Window
 
 from models import Player
-
 from constants import (
     SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_IMG_ROOT,
     MUSIC_ROOT, COUNTDOWN_FROM, TICKS_PER_COUNTDOWN,
@@ -21,7 +21,11 @@ class FightView(arcade.View):
     This class is responsible for rendering the fight scene.
     """
 
-    def __init__(self, window, player1, player2):
+    def __init__(
+        self,
+        window: Window,
+        player1: Player, player2: Player
+    ):
         """
         Initialize the fight scene with the given window and players.
         """
@@ -114,8 +118,10 @@ class FightView(arcade.View):
         arcade.start_render()
 
         # Draw background
-        arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,
-                                      SCREEN_WIDTH, SCREEN_HEIGHT, self.background_texture)
+        arcade.draw_texture_rectangle(
+            SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,
+            SCREEN_WIDTH, SCREEN_HEIGHT, self.background_texture
+        )
         # Draw players
         self.player1.draw()
         self.player2.draw()
@@ -123,8 +129,9 @@ class FightView(arcade.View):
         # Draw countdown timer
         if self.countdown_counter > TICKS_PER_COUNTDOWN:
             arcade.draw_text(
-                f"{self.countdown_values[(
-                    self.countdown_counter-TICKS_PER_COUNTDOWN-1) // TICKS_PER_COUNTDOWN]}",
+                f"{self.countdown_values[
+                    (self.countdown_counter-TICKS_PER_COUNTDOWN-1) // TICKS_PER_COUNTDOWN
+                ]}",
                 SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, arcade.color.RED,
                 font_size=120, anchor_x="center", font_name="Utopia", bold=True
             )

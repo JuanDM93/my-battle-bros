@@ -43,7 +43,7 @@ ACTIVITY_PARAMS = {
 }
 
 
-def build_animations_registry(character):
+def build_animations_registry(character: str):
     """
     Build the animations registry for the given character.
     """
@@ -62,11 +62,14 @@ def build_animations_registry(character):
 
     # Specials
     animations_registry['win'] = ActivityAnimationBundle(
-        character_dir + '/end', 'win')
+        character_dir + '/end', 'win'
+    )
     animations_registry['lose'] = ActivityAnimationBundle(
-        character_dir+'/end', 'lose')
+        character_dir + '/end', 'lose'
+    )
     animations_registry['start'] = ActivityAnimationBundle(
-        character_dir, 'start')
+        character_dir, 'start'
+    )
     with open(character_registry_cache_path, 'wb') as fout:
         pickle.dump(animations_registry, fout)
     return animations_registry
@@ -77,15 +80,20 @@ class ActivityAnimationBundle:
     This class represents a bundle of animations for a given activity.
     """
 
-    def __init__(self, stance_path, action):
+    def __init__(self, stance_path: str, action: str):
         """
         Initialize the animation bundle with the given stance path and action.
         """
         print(stance_path)
         self.path = stance_path + "/" + action
         self.sub_dirs = glob.glob(self.path + '/*')
-        self.animations = [Animation(
-            x, ACTIVITY_PARAMS[action][0], ACTIVITY_PARAMS[action][1]) for x in self.sub_dirs]
+        self.animations = [
+            Animation(
+                x,
+                ACTIVITY_PARAMS[action][0],
+                ACTIVITY_PARAMS[action][1]
+            ) for x in self.sub_dirs
+        ]
 
     def random_animation(self):
         """
